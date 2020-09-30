@@ -1,0 +1,243 @@
+html, body
+  font-family: "Noto Sans TC",Arial
+  height: 300vh
+  width: 100%
+  background: -webkit-gradient(linear, left top, left bottom, from(#1D2B49), color-stop(#1A45A0), color-stop(#91cdff), to(#fff))
+  background: linear-gradient(#1D2B49, #1A45A0, #91cdff, #fff)
+
+.container-fluid
+  padding: 0 !important
+  margin: 0 !important
+
+//設定Mixins
+=size($w,$h:$w,$bdrs:0)
+  width: $w
+  height: $h
+  border-radius: $bdrs
+  
+=flex($j:center,$a:center)
+  display: flex
+  justify-content: $j
+  align-items: $a
+
+=abpos($l:initial,$t:initial)
+  position: absolute
+  left: $l
+  top: $t
+
+//設定太陽跟月亮的共用尺寸/位置
+.sun,.moon
+  +size(100px,100px,50%)
+  +abpos(57%,12%)
+  position: fixed
+  
+  
+//設定太陽的顏色跟光暈，初始透明度為0(夜晚看不到)
+.sun
+  background-color: #ffdd38
+  box-shadow: 0px 0px 20px rgba(#ffdd38,0.5)
+  opacity: 0
+  animation: sunAppear 5s both
+  transition: all 5s fade-out 
+  display: none
+  
+.moon
+  box-shadow: inset 10px -10px rgba(#fff,0.9)
+  animation: moonAppear 5s both
+
+//月亮出現的動畫
+@keyframes moonAppear
+  0%
+    box-shadow: inset 0px 0px rgba(#fff,0.9)
+  100%
+    box-shadow: inset 10px -10px rgba(#fff,0.9)
+  
+//太陽出現的動畫
+@keyframes sunAppear
+  0%
+    box-shadow: 0px 0px 10px rgba(#faf4d1,0.2)
+    opacity: 0
+  100%
+    opacity: 1
+
+.allstars
+  //外層容器撐滿整個框框
+  +size(100%)
+  +abpos(0,0)
+  
+  //星星從原本位置偏移落下的動畫，從右上到左下
+  @keyframes falling
+    0%,100%
+      opacity: 0
+    70%
+      opacity: 1
+    0%
+      transform: translate(100px,0px)
+    100%
+      transform: translate(0px,250px)
+
+  //以star開頭的為星星
+  [class^='star']
+    +size(3px,3px,50%)
+    background-color: #fff
+    animation: falling 2s infinite
+    
+  //產生30顆星星不同的偏移位置跟動畫delay
+  @for $i from 1 through 30
+    .star#{$i}
+      $posX: random(100)*1%
+      $posY: random(80)*-1% + 50%
+      +abpos($posX,$posY)
+      animation-delay: $i*-0.1s
+
+.bg-img
+  position: fixed
+  right: 0
+  bottom: 0
+  width: 100%
+  padding: 0 !important
+  z-index: 1
+
+  .castle 
+    width: 100%
+
+.ground 
+  position: fixed
+  bottom: -10px
+  width: 100%
+  z-index: 2
+
+.copyright
+  position: fixed
+  bottom: 20px
+  width: 100%
+  z-index: 3
+  font-size: 12pt
+  color: #fff
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  font-weight: 300
+  padding-left: 10%
+  
+section
+  width: 100%
+  height: 100vh
+  color: #fff
+  display: flex
+  flex-flow: wrap column
+  justify-content: center
+  align-items: flex-start
+  z-index: 10
+  
+h1
+  font-size: 4rem
+  letter-spacing: 5px
+  font-weight: 500
+
+h3
+  font-size: 1.5rem
+  letter-spacing: 2px
+
+h4
+  font-size: 1rem
+  font-weight: 400
+  letter-spacing: 1px
+
+#first
+  h1
+    margin-bottom: 2.5rem !important
+  h3 
+    margin-top: 0 !important
+    margin-bottom: 2.5rem
+
+  .progress
+    width: 100%
+    height: 30px
+
+  .progress-area
+    flex: 0 !important
+    position: relative
+
+  .progress-info
+    display: flex
+    justify-content: flex-end
+
+
+.form-area, .form-group
+  padding: 0 !important
+    
+.btn
+  +size(120px,50px,10px)
+  padding: 10px
+  font-size: 1.2rem
+  letter-spacing: 1px
+  color: #1D2B49
+  background-color: #fff
+  box-shadow: 1px 1px 10px rgba(#ccc,0.5)
+  cursor: pointer
+
+#third
+  h1
+    color: #1E5F9B
+  .white-board
+    +size(400px,500px,5%)
+    background-color: rgba(255,255,255,.8)
+    margin-top: 2.5%
+    color: #1D2B49
+    padding: 1rem 2rem
+    overflow: hidden
+
+    .board-text 
+      color: #1E5F9B
+      border-bottom: 1px solid #7AB3DD
+      padding: .8rem 1.2rem
+      display: flex
+      justify-content: space-between
+    h4.board-text:nth-child(8)
+      border-bottom: 0 !important
+
+@media (min-width: 300px) and (max-width: 992px)
+  .bg-img
+    display: flex
+    justify-content: flex-end
+    .castle 
+      width: 50% !important
+  
+  .ground
+    bottom: -5px
+  
+  .copyright 
+    padding-left: 8rem
+
+@media (min-width: 300px) and (max-width: 576px)
+  html, body 
+    height: 335vh
+
+  #third
+    height: 135vh
+
+  section
+    padding-left: 10%
+
+  h1
+    font-size: 2.5rem
+
+  .ground
+    bottom: -5px
+
+  .copyright
+    bottom: 5px
+    font-size: 10px
+    padding-left: 4rem !important
+
+  .white-board
+    width: 340px !important
+
+@media (min-width: 576px) and (max-width: 992px)
+  section
+    padding-left: 10%
+
+@media (min-width: 1024px) 
+  section
+    padding-left: 10%
