@@ -10,10 +10,10 @@
 - 使用firebase存取資料
 - 使用bootstrap框架 & RWD
 
+### 實作
+- 設計及部分css（星星落下動畫）： Mesto Chang
+- 其他：Megan（我）
+
 <img src="images/index1.png" alt="index1">
 <img src="images/index2.png" alt="index2">
 <img src="images/index3.png" alt="index3">
-
-## 實作
-- 設計及部分css（星星落下動畫）： Mesto Chang
-- 其他：Megan（我）
