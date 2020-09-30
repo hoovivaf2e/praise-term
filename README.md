@@ -10,6 +10,6 @@
 - 使用firebase存取資料
 - 使用bootstrap框架 & RWD
 
-<img src="images/index-1.png" alt="index-1">
-<img src="images/index-2.png" alt="index-2">
-<img src="images/index-3.png" alt="index-3">
+<img src="images/index1.png" alt="index1">
+<img src="images/index2.png" alt="index2">
+<img src="images/index3.png" alt="index3">
